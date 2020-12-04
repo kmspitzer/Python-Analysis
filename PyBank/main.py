@@ -4,7 +4,7 @@
 # UCSD Data Science and Visualization Bootcamp
 # 9 Nov 2020 Cohort
 #
-# Python Homework
+# Python Homework  PYBANK
 # 9 Dec 2020
 #
 
@@ -12,7 +12,7 @@ import csv
 
 
 # set input filename
-pybank_csv = "c:\\python-challenge\\Pybank\\Resources\\budget_data.csv"
+pybank_csv = "c:\\python-challenge\\PyBank\\Resources\\budget_data.csv"
 
 
 # initialize counters, accumulators and flags
