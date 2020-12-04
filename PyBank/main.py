@@ -47,9 +47,9 @@ print("\nFinancial Analysis")
 print("-----------------------------")
 print(f"Total Months: {month_count}")
 print(f"Total: ${net_profit}")
-print(f"Average Change: ${avg_change}")
+print(f"Average Change: ${round(avg_change, 2)}")
 print(f"Greatest Increase in Profits: {incr_month} (${greatest_incr})")
-print(f"Greatest Decrease in Profits: {decr_month} (${greatest_decr})")
+print(f"Greatest Decrease in Profits: {decr_month} (${greatest_decr})\n")
 
 
 
@@ -62,6 +62,6 @@ with open(output_file, "w") as datafile:
     datafile.write("-----------------------------\n")
     datafile.write(f"Total Months: {month_count}\n")
     datafile.write(f"Total: ${net_profit}\n")
-    datafile.write(f"Average Change: ${avg_change}\n")
+    datafile.write(f"Average Change: ${round(avg_change,2)}\n")
     datafile.write(f"Greatest Increase in Profits: {incr_month} (${greatest_incr})\n")
     datafile.write(f"Greatest Decrease in Profits: {decr_month} (${greatest_decr})\n")
