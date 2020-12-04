@@ -8,6 +8,7 @@ net_profit = 0
 total_change = 0
 greatest_incr = 0
 greatest_decr = 0
+first_read = True
 
 # Use encoding for Windows
 with open(pybank_csv, newline='', encoding='utf-8') as csvfile:
@@ -17,25 +18,30 @@ with open(pybank_csv, newline='', encoding='utf-8') as csvfile:
     next(csvreader)
 
     for row in csvreader:
-        month = row[0]
-        change = int(row[1])
+        # read profit from current line
+        current_month = row[0]
+        current_profit = int(row[1])
 
-        if month_count > 0:
+        if first_read:
+            first_read = False
+        else:
+            change = current_profit - prev_profit
             total_change += change
 
-        net_profit += change
+            if change > greatest_incr:
+                greatest_incr = change
+                incr_month = current_month
+            elif change < greatest_decr:
+                greatest_decr = change
+                decr_month = current_month
 
-        if change > greatest_incr:
-            greatest_incr = change
-            incr_month = month
-        elif change < greatest_decr:
-            greatest_decr = change
-            decr_month = month
-
+        
+        net_profit += current_profit
         month_count += 1
+        prev_profit = current_profit
 
 
-avg_change = total_change/month_count - 1
+avg_change = total_change/(month_count - 1)
 
 print("\nFinancial Analysis")
 print("-----------------------------")
