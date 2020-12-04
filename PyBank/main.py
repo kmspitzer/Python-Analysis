@@ -4,7 +4,8 @@ import csv
 pybank_csv = "c:\\python-challenge\\Pybank\\Resources\\budget_data.csv"
 
 month_count = 0
-net_change = 0
+net_profit = 0
+total_change = 0
 greatest_incr = 0
 greatest_decr = 0
 
@@ -19,7 +20,10 @@ with open(pybank_csv, newline='', encoding='utf-8') as csvfile:
         month = row[0]
         change = int(row[1])
 
-        net_change += change
+        if month_count > 0:
+            total_change += change
+
+        net_profit += change
 
         if change > greatest_incr:
             greatest_incr = change
@@ -30,11 +34,14 @@ with open(pybank_csv, newline='', encoding='utf-8') as csvfile:
 
         month_count += 1
 
-    
+
+avg_change = total_change/month_count - 1
+
 print("\nFinancial Analysis")
 print("-----------------------------")
 print(f"Total Months: {month_count}")
-print(f"Total: ${net_change}")
+print(f"Total: ${net_profit}")
+print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {incr_month} (${greatest_incr})")
 print(f"Greatest Decrease in Profits: {decr_month} (${greatest_decr})")
 
@@ -48,6 +55,7 @@ with open(output_file, "w") as datafile:
     datafile.write("Financial Analysis\n")
     datafile.write("-----------------------------\n")
     datafile.write(f"Total Months: {month_count}\n")
-    datafile.write(f"Total: ${net_change}\n")
+    datafile.write(f"Total: ${net_profit}\n")
+    datafile.write(f"Average Change: ${avg_change}\n")
     datafile.write(f"Greatest Increase in Profits: {incr_month} (${greatest_incr})\n")
     datafile.write(f"Greatest Decrease in Profits: {decr_month} (${greatest_decr})\n")
