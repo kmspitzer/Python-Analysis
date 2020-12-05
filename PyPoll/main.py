@@ -50,8 +50,9 @@ print("-----------------------------")
 print(f"Total Votes: {total_votes}")
 print("-----------------------------")
 for candidate in election_cnts:
-    print(f"{candidate}: {total_votes/election_cnts[candidate]}% ({election_cnts[candidate]})")
-    if election_cnts[candidate] > most votes:
+    percent_votes = format((election_cnts[candidate]/total_votes) * 100, ".3f")
+    print(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})")
+    if election_cnts[candidate] > most_votes:
         most_votes = election_cnts[candidate]
         winner = candidate
 print("-----------------------------")
@@ -71,10 +72,11 @@ with open(output_file, "w") as datafile:
     datafile.write(f"Total Votes: {total_votes}\n")
     datafile.write("-----------------------------\n")
     for candidate in election_cnts:
-        print(f"{candidate}: {total_votes/election_cnts[candidate]}% ({election_cnts[candidate]})")
-            if election_cnts[candidate] > most votes:
-                most_votes = election_cnts[candidate]
-                winner = candidate
+        percent_votes = format((election_cnts[candidate]/total_votes) * 100, ".3f")
+        datafile.write(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})\n")        
+        if election_cnts[candidate] > most_votes:
+            most_votes = election_cnts[candidate]
+            winner = candidate
     datafile.write("-----------------------------\n")
     datafile.write(f"Winner: {winner}\n")
     datafile.write("-----------------------------\n")
