@@ -30,53 +30,61 @@ with open(pypoll_csv, newline='', encoding='utf-8') as csvfile:
 
     # loop through all rows in input file
     for row in csvreader:
-        # read month and profit from current line
+        # read candidate name
         candidate = row[2]
 
+        # if candidate is not in dictionary, add with value of 1 vote
         if candidate not in election_cnts:
             election_cnts[candidate] = 1
         else:
+            # candidate already in dictionary, increment number of votes
             election_cnts[candidate] += 1
 
-        
+        # increment total number of votes cast
+        # for all candidates
         total_votes += 1
 
 
 
-
-# print analysis to console
-print("\nElection Results")
-print("-----------------------------")
-print(f"Total Votes: {total_votes}")
-print("-----------------------------")
-for candidate in election_cnts:
-    percent_votes = format((election_cnts[candidate]/total_votes) * 100, ".3f")
-    print(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})")
-    if election_cnts[candidate] > most_votes:
-        most_votes = election_cnts[candidate]
-        winner = candidate
-print("-----------------------------")
-print(f"Winner: {winner}")
-print("-----------------------------")
-
-
-
 # set output filename
-output_file = "C:/python-challenge/PyPoll/analysis/pypoll_analysis.txt"
+output_file = "C:/python-challenge/PyPoll/analysis/pypoll_results.txt"
 
 # open the output file and write the
-# analysis
+# election results to file and console
 with open(output_file, "w") as datafile:
     datafile.write("Election Results\n")
     datafile.write("-----------------------------\n")
     datafile.write(f"Total Votes: {total_votes}\n")
     datafile.write("-----------------------------\n")
+
+    print("\nElection Results")
+    print("-----------------------------")
+    print(f"Total Votes: {total_votes}")
+    print("-----------------------------")
+
+
+    # loop through all candidates in dictionary
     for candidate in election_cnts:
+        # calculates percent votes cast for the current candidate
         percent_votes = format((election_cnts[candidate]/total_votes) * 100, ".3f")
-        datafile.write(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})\n")        
+
+        # write formatted line to output file
+        datafile.write(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})\n")
+        # print formatted line to console
+        print(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})")
+
+        # grab candidate with the most votes
         if election_cnts[candidate] > most_votes:
             most_votes = election_cnts[candidate]
             winner = candidate
+
+    # write the winner's name to the output file
     datafile.write("-----------------------------\n")
     datafile.write(f"Winner: {winner}\n")
     datafile.write("-----------------------------\n")
+
+    # print winner's name to console
+    print("-----------------------------")
+    print(f"Winner: {winner}")
+    print("-----------------------------\n")
+
