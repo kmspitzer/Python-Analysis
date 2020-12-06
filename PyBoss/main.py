@@ -10,81 +10,113 @@
 
 import csv
 
+us_state_abbrev = {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY',
+}
 
 # set input filename
-pypoll_csv = "c:/python-challenge/PyPoll/Resources/election_data.csv"
+pyboss_csv = "c:/python-challenge/PyBoss/Resources/employee_data.csv"
 
 
-# initialize counters, accumulators and flags
-total_votes = 0
-most_votes = 0
-election_cnts = {}
 
-# open CSV file and assign pointer
-with open(pypoll_csv, newline='', encoding='utf-8') as csvfile:
+
+# Lists to store data
+employee_id = []
+first_name = []
+last_name = []
+dob = []
+ssn = []
+state = []
+
+
+# Use encoding for Windows
+# with open(udemy_csv, newline='', encoding='utf-8') as csvfile:
+with open(pyboss_csv, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
 
-    # skip header row
     next(csvreader)
 
-
-    # loop through all rows in input file
     for row in csvreader:
-        # read candidate name
-        candidate = row[2]
+        # Add title
+        employee_id.append(row[0])
 
-        # if candidate is not in dictionary, add with value of 1 vote
-        if candidate not in election_cnts:
-            election_cnts[candidate] = 1
-        else:
-            # candidate already in dictionary, increment number of votes
-            election_cnts[candidate] += 1
+        splitname = row[1].split()
+        first_name.append(splitname[0])
+        last_name.append(splitname[1])
 
-        # increment total number of votes cast
-        # for all candidates
-        total_votes += 1
+        splitdob = row[2].split("-")
+        dob.append(splitdob[1] + "/" + splitdob[2] + "/" + splitdob[0])
 
+        splitssn = row[3].split("-")
+        ssn.append("***-***-" + splitssn[2])
 
 
-# set output filename
-output_file = "C:/python-challenge/PyPoll/analysis/pypoll_results.txt"
+        # Add price
+        state.append(us_state_abbrev[row[4]])
 
-# open the output file and write the
-# election results to file and console
-with open(output_file, "w") as datafile:
-    datafile.write("Election Results\n")
-    datafile.write("-----------------------------\n")
-    datafile.write(f"Total Votes: {total_votes}\n")
-    datafile.write("-----------------------------\n")
+    
+# Zip lists together
+newformat_csv = zip(employee_id, first_name, last_name, dob, ssn, state)
 
-    print("\nElection Results")
-    print("-----------------------------")
-    print(f"Total Votes: {total_votes}")
-    print("-----------------------------")
+# Set variable for output file
+output_file = "c:/python-challenge/PyBoss/analysis/new_employee_data.csv"
 
+#  Open the output file
+with open(output_file, "w", newline="") as datafile:
+    writer = csv.writer(datafile)
 
-    # loop through all candidates in dictionary
-    for candidate in election_cnts:
-        # calculates percent votes cast for the current candidate
-        percent_votes = format((election_cnts[candidate]/total_votes) * 100, ".3f")
+    # Write the header row
+    writer.writerow(["Emp ID", "First Name", "Last Name", "DOB",
+                     "SSN", "State"])
 
-        # write formatted line to output file
-        datafile.write(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})\n")
-        # print formatted line to console
-        print(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})")
-
-        # grab candidate with the most votes
-        if election_cnts[candidate] > most_votes:
-            most_votes = election_cnts[candidate]
-            winner = candidate
-
-    # write the winner's name to the output file
-    datafile.write("-----------------------------\n")
-    datafile.write(f"Winner: {winner}\n")
-    datafile.write("-----------------------------\n")
-
-    # print winner's name to console
-    print("-----------------------------")
-    print(f"Winner: {winner}")
-    print("-----------------------------\n")
-
+    # Write in zipped rows
+    writer.writerows(newformat_csv)
