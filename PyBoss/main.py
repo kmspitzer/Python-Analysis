@@ -7,9 +7,13 @@
 # Python Homework  PYBOSS
 # 9 Dec 2020
 #
+# NOTE: us_state_abbrev dictionary copied from GitHub open source repository afhaque/us_state_abbrev.py
+#
 
 import csv
 
+
+# state abbreviation dictionary copied from GitHub
 us_state_abbrev = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -63,13 +67,14 @@ us_state_abbrev = {
     'Wyoming': 'WY',
 }
 
+
+
 # set input filename
 pyboss_csv = "c:/python-challenge/PyBoss/Resources/employee_data.csv"
 
 
 
-
-# Lists to store data
+# create empty list to store reformatted data
 employee_id = []
 first_name = []
 last_name = []
@@ -78,45 +83,54 @@ ssn = []
 state = []
 
 
-# Use encoding for Windows
-# with open(udemy_csv, newline='', encoding='utf-8') as csvfile:
+# open inputfile for reading
 with open(pyboss_csv, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
 
+    # skip header
     next(csvreader)
 
+
+    # loop through each row of data
     for row in csvreader:
-        # Add title
+
+        # add employee id to employee id list
         employee_id.append(row[0])
 
+        # split name into first and last and add
+        # to appropriate lists
         splitname = row[1].split()
         first_name.append(splitname[0])
         last_name.append(splitname[1])
 
+        # split date of birth to remove hyphens and
+        # reformat as MM/DD/YYYY
         splitdob = row[2].split("-")
         dob.append(splitdob[1] + "/" + splitdob[2] + "/" + splitdob[0])
 
+        # split social security number so that we can use
+        # save only the last 4 digits in out new table
         splitssn = row[3].split("-")
         ssn.append("***-***-" + splitssn[2])
 
-
-        # Add price
+        # grab state abbreviation out of dictionary and add
+        # to our list
         state.append(us_state_abbrev[row[4]])
 
     
-# Zip lists together
+# zip lists together
 newformat_csv = zip(employee_id, first_name, last_name, dob, ssn, state)
 
-# Set variable for output file
+# set variable for output file
 output_file = "c:/python-challenge/PyBoss/analysis/new_employee_data.csv"
 
-#  Open the output file
+#  open output file
 with open(output_file, "w", newline="") as datafile:
     writer = csv.writer(datafile)
 
-    # Write the header row
+    # write the header row
     writer.writerow(["Emp ID", "First Name", "Last Name", "DOB",
                      "SSN", "State"])
 
-    # Write in zipped rows
+    # Write in reformatted zipped rows
     writer.writerows(newformat_csv)
