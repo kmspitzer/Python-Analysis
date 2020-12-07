@@ -46,10 +46,12 @@ for sentence in sentences:
 
 
 # calculate and print analysis to terminal
-print(f"\nApproximate Word Count: {word_count}")
+print("\nParagraph Analysis")
+print("------------------------")
+print(f"Approximate Word Count: {word_count}")
 print(f"Approximate Sentence Count: {len(sentences)}")
-print(f"Average Letter Count: {round(char_count/word_count, 2)}")
-print(f"Average Sentence Length: {round(word_count/len(sentences), 2)}\n")
+print(f"Average Letter Count: {round(char_count/word_count, 1)}")
+print(f"Average Sentence Length: {round(word_count/len(sentences), 1)}\n")
 
 
 # set output filename
@@ -58,7 +60,9 @@ output_file = "c:/python-challenge/PyParagraph/analysis/pyparagraph_analysis.txt
 # open the output file and write the
 # analysis
 with open(output_file, "w") as datafile:
+    datafile.write("Paragraph Analysis\n")
+    datafile.write("-----------------------\n")
     datafile.write(f"Approximate Word Count: {word_count}\n")
     datafile.write(f"Approximate Sentence Count: {len(sentences)}\n")
-    datafile.write(f"Average Letter Count: {round(char_count/word_count, 2)}\n")
-    datafile.write(f"Average Sentence Length: {round(word_count/len(sentences), 2)}\n")
+    datafile.write(f"Average Letter Count: {round(char_count/word_count, 1)}\n")
+    datafile.write(f"Average Sentence Length: {round(word_count/len(sentences), 1)}\n")
