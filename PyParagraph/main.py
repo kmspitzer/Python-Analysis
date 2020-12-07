@@ -6,6 +6,8 @@
 # Python Homework  PYPARAGRAPH
 # 9 Dec 2020
 #
+# Collaborated with Rick Spitzer
+#
 
 
 import re

@@ -7,7 +7,9 @@
 # Python Homework  PYBOSS
 # 9 Dec 2020
 #
-# NOTE: us_state_abbrev dictionary copied from GitHub open source repository afhaque/us_state_abbrev.py
+# Collaborated with Rick Spitzer
+# 
+# # NOTE: us_state_abbrev dictionary copied from GitHub open source repository afhaque/us_state_abbrev.py
 #
 
 import csv

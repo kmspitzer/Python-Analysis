@@ -7,6 +7,8 @@
 # Python Homework  PYBANK
 # 9 Dec 2020
 #
+# Collaborated with Rick Spitzer
+#
 
 import csv
 
