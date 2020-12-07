@@ -1,4 +1,3 @@
-
 #
 # Kate Spitzer
 # UCSD Data Science and Visualization Bootcamp
@@ -8,83 +7,58 @@
 # 9 Dec 2020
 #
 
-import csv
+
+import re
 
 
-# set input filename
-pypoll_csv = "c:/python-challenge/PyPoll/Resources/election_data.csv"
+
+word_count = 0
+char_count = 0
 
 
-# initialize counters, accumulators and flags
-total_votes = 0
-most_votes = 0
-election_cnts = {}
+# set the input filename
+filepath = "c:/python-challenge/PyParagraph/Resources/paragraph_input.txt"
 
-# open CSV file and assign pointer
-with open(pypoll_csv, newline='', encoding='utf-8') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=",")
-
-    # skip header row
-    next(csvreader)
+# open input file
+with open(filepath, 'r', encoding='utf-8') as text:
 
 
-    # loop through all rows in input file
-    for row in csvreader:
-        # read candidate name
-        candidate = row[2]
+    # read contents into var
+    paragraph = text.read()
 
-        # if candidate is not in dictionary, add with value of 1 vote
-        if candidate not in election_cnts:
-            election_cnts[candidate] = 1
-        else:
-            # candidate already in dictionary, increment number of votes
-            election_cnts[candidate] += 1
 
-        # increment total number of votes cast
-        # for all candidates
-        total_votes += 1
+# break paragraph into sentences
+sentences = re.split("(?<=[.!?]) +", paragraph)
 
+# loop through each sentence
+for sentence in sentences:
+    # break sentence into words
+    words = sentence.split()
+
+    # accumulate number of words in each sentence
+    word_count += len(words)
+
+    # loop through each word in the sentence
+    for word in words:
+        # accumulate numer of characters in each word
+        char_count += len(word)
+
+
+
+# calculate and print analysis to terminal
+print(f"\nApproximate Word Count: {word_count}")
+print(f"Approximate Sentence Count: {len(sentences)}")
+print(f"Average Letter Count: {round(char_count/word_count, 2)}")
+print(f"Average Sentence Length: {round(word_count/len(sentences), 2)}\n")
 
 
 # set output filename
-output_file = "C:/python-challenge/PyPoll/analysis/pypoll_results.txt"
+output_file = "c:/python-challenge/PyParagraph/analysis/pyparagraph_analysis.txt"
 
 # open the output file and write the
-# election results to file and console
+# analysis
 with open(output_file, "w") as datafile:
-    datafile.write("Election Results\n")
-    datafile.write("-----------------------------\n")
-    datafile.write(f"Total Votes: {total_votes}\n")
-    datafile.write("-----------------------------\n")
-
-    print("\nElection Results")
-    print("-----------------------------")
-    print(f"Total Votes: {total_votes}")
-    print("-----------------------------")
-
-
-    # loop through all candidates in dictionary
-    for candidate in election_cnts:
-        # calculates percent votes cast for the current candidate
-        percent_votes = format((election_cnts[candidate]/total_votes) * 100, ".3f")
-
-        # write formatted line to output file
-        datafile.write(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})\n")
-        # print formatted line to console
-        print(f"{candidate}: {percent_votes}% ({election_cnts[candidate]})")
-
-        # grab candidate with the most votes
-        if election_cnts[candidate] > most_votes:
-            most_votes = election_cnts[candidate]
-            winner = candidate
-
-    # write the winner's name to the output file
-    datafile.write("-----------------------------\n")
-    datafile.write(f"Winner: {winner}\n")
-    datafile.write("-----------------------------\n")
-
-    # print winner's name to console
-    print("-----------------------------")
-    print(f"Winner: {winner}")
-    print("-----------------------------\n")
-
+    datafile.write(f"Approximate Word Count: {word_count}\n")
+    datafile.write(f"Approximate Sentence Count: {len(sentences)}\n")
+    datafile.write(f"Average Letter Count: {round(char_count/word_count, 2)}\n")
+    datafile.write(f"Average Sentence Length: {round(word_count/len(sentences), 2)}\n")
