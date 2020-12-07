@@ -45,15 +45,15 @@ Analysis consists of:
  
  Analysis consists of:
  
-   Total number of votes cast
+	   Total number of votes cast
 	
-   Complete list of candidates who received votes
+	   Complete list of candidates who received votes
 	
-   Percentage of votes each candidate won
+	   Percentage of votes each candidate won
 	
-   Total number of votes each candidate won
+	   Total number of votes each candidate won
 	
-   Winner of the election based on popular vote
+	   Winner of the election based on popular vote
 	
 
      Output is in the following format:
@@ -77,30 +77,30 @@ Analysis consists of:
  
  Input data consists of:
  
-       Emp ID
+	       Emp ID
 		 
-       Name
+	       Name
 		 
-       DOB (in YYYY-MM-DD fomrat)
+	       DOB (in YYYY-MM-DD fomrat)
 		 
-       SSN (in nnn-nnn-nnnn)
+	       SSN (in nnn-nnn-nnnn)
 		 
-       State (spelled out in Title format)
+	       State (spelled out in Title format)
 		 
 
  Name, DOB, SSN and State need to be reformatted and written to the output file as follows:
- 
-       Emp ID
+
+	       Emp ID
 		 
-       First Name
+	       First Name
 		 
-       Last Name
+	       Last Name
 		 
-       DOB (in MM/DD/YYYY format)
+	       DOB (in MM/DD/YYYY format)
 		 
-       SSN (in ***-***-nnnn format)
+	       SSN (in ***-***-nnnn format)
 		 
-       State (in 2 character abbreviation format
+	       State (in 2 character abbreviation format
 
    NOTE: state abbreviation dictionary include from GitHub afhaque/us_state_abbrev.py
 
@@ -111,13 +111,13 @@ Analysis consists of:
  
  Analysis consists of:
  
-   Approximate word count
+	   Approximate word count
 	
-   Approximate sentence count
+	   Approximate sentence count
 	
-   Approximate letter count (per word)
+	   Approximate letter count (per word)
 	
-   Average sentence length (in words)
+	   Average sentence length (in words)
 	
 
      Output is in the following format:
