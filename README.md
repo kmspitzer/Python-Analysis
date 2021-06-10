@@ -1,13 +1,5 @@
 # python-challenge
 
-UCSD Data Science and Visualization Bootcamp - Python HW  9 Dec 2020
-
-
-Collaborated with Rick Spitzer
-
-
-This repository contains files pertaining to the Python Homework due 9 Dec 2020.
-
 
 
 PyBank: This script reads in a .csv file containing monthly profit/loss data by month. Analysis is performed on data read and is printed
